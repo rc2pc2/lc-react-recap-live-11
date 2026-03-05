@@ -1,39 +1,43 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 function App() {
-  const [counter, setCounter] = useState(0);
+  const [contenuto, setContenuto] = useState('')
+  const [isLoading, setIsLoading] = useState(true);
 
-  function increment() {
-    setCounter((counter) => counter + 1);
-  }
+  const funzionaSciangula = () => {
+    setContenuto(`Contenuto generato: ${Math.floor(Math.random() * 99999999999) + 1}`);
 
-
-  function decrement() {
-    if (counter <= -15) {
-      console.warn("LIMITE NEGATIVO RAGGIUNTO")
-    } else {
-      setCounter((counter) => counter - 1);
+    if (isLoading === true) {
+      setIsLoading(false);
     }
   }
+
 
   return (
     <>
       <main className="container">
+        <h1>
+          Loader alternativo
+        </h1>
         <section className="row">
           <div className="grid">
-            <h1>
-              Contatore
-            </h1>
-          </div>
-          <div className="grid">
-            <p>
-              Valore del contatore: {counter}
-            </p>
-            <button className="btn" onClick={increment}>
-              Incrementa contatore
-            </button>
-            <button className="btn" onClick={decrement}>
-              Decrementa contatore
+
+            {isLoading &&
+              <div className="loader">
+                <div className="spinner"></div>
+                <div className="spinner"></div>
+                <div className="spinner"></div>
+                <div className="spinner"></div>
+                <div className="spinner"></div>
+                <div className="spinner"></div>
+                <div className="spinner"></div>
+              </div>
+            }
+
+            <p>{contenuto}</p>
+
+            <button className="btn" onClick={funzionaSciangula}>
+              Aggiorna testo
             </button>
           </div>
         </section>

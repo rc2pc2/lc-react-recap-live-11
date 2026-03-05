@@ -1,45 +1,55 @@
 import { useState, useEffect } from 'react'
 
 function App() {
-  const [contenuto, setContenuto] = useState('')
-  const [isLoading, setIsLoading] = useState(true);
+  const [contenuto, setContenuto] = useState({
+    nomino: "Valore di nomino",
+    nomone: "Valore di nomone",
+    nometto: "Valore di nometto",
+  })
 
-  const funzionaSciangula = () => {
-    setContenuto(`Contenuto generato: ${Math.floor(Math.random() * 99999999999) + 1}`);
-
-    if (isLoading === true) {
-      setIsLoading(false);
-    }
+  function aggiornaInput(evento) {
+    setContenuto((informazioni) => ({
+      ...informazioni,
+      [evento.target.name]: evento.target.value
+    }))
   }
-
 
   return (
     <>
       <main className="container">
         <h1>
-          Loader alternativo
+          Input reattivo
         </h1>
         <section className="row">
-          <div className="grid">
+          <form className="grid">
+            <p>{contenuto.nomino}</p>
 
-            {isLoading &&
-              <div className="loader">
-                <div className="spinner"></div>
-                <div className="spinner"></div>
-                <div className="spinner"></div>
-                <div className="spinner"></div>
-                <div className="spinner"></div>
-                <div className="spinner"></div>
-                <div className="spinner"></div>
-              </div>
-            }
+            <input
+              className='input'
+              type="text"
+              onChange={aggiornaInput}
+              value={contenuto.nomino}
+              name='nomino'
+            />
 
-            <p>{contenuto}</p>
+            <p>{contenuto.nomone}</p>
+            <input
+              className='input'
+              type="text"
+              onChange={aggiornaInput}
+              value={contenuto.nomone}
+              name='nomone'
+            />
 
-            <button className="btn" onClick={funzionaSciangula}>
-              Aggiorna testo
-            </button>
-          </div>
+            <p>{contenuto.nometto}</p>
+            <input
+              className='input'
+              type="text"
+              onChange={aggiornaInput}
+              value={contenuto.nometto}
+              name='nometto'
+            />
+          </form>
         </section>
       </main >
     </>
